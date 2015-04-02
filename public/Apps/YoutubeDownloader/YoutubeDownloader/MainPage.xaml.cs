@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using YoutubeExtractor;
+using YoutubeDownloader.Libraries.YoutubeExtractor.MediaLibrary;
 
 // The WebView Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
 
@@ -26,6 +27,8 @@ namespace YoutubeDownloader {
         private string currentUri;
         public MainPage() {
             this.InitializeComponent();
+            MediaLogger.OpenLogFileAndLoadTracks(true);
+            MediaLogger.OpenLogFileAndLoadTracks(false);
 
             WebViewControl.NavigationCompleted += webView_NavigationCompleted;
             this.NavigationCacheMode = NavigationCacheMode.Required;

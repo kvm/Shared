@@ -16,14 +16,6 @@ namespace YoutubeExtractor
         {
 // TODO: anichopr
 //#if PORTABLE
-            //var request = (HttpWebRequest)WebRequest.Create(url);
-            //request.Method = "GET";
-            //using (completedEvent = new ManualResetEvent(false))
-            //{
-            //request.BeginGetResponse(new AsyncCallback(ReadWebRequestCallback), request);
-            //completedEvent.WaitOne();
-            //}
-            //return str;
             var request = WebRequest.Create(url);
             request.Method = "GET";
             request.Headers["User-Agent"] = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36";
@@ -42,16 +34,6 @@ namespace YoutubeExtractor
 //            }
 //#endif
         }
-
-        //private static async void ReadWebRequestCallback(IAsyncResult callbackResult)
-        //{
-        //    WebRequest request = (WebRequest)callbackResult.AsyncState;
-        //    using (WebResponse response = request.EndGetResponse(callbackResult))
-        //    {
-        //        str = ReadStreamFromResponse(response);
-        //        completedEvent.Set();
-        //    }
-        //}
 
         public static string HtmlDecode(string value)
         {

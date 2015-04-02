@@ -65,7 +65,7 @@ namespace YoutubeExtractor {
                 }
             }
 
-            this.OnDownloadFinished(EventArgs.Empty);
+            this.OnDownloadFinished(EventArgs.Empty, cancel, copiedBytes);
         }
 
         Stream CreateFile(string filename) {
