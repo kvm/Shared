@@ -90,10 +90,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\NavigationHelper.cs" />
-    <Compile Include="Common\ObservableDictionary.cs" />
-    <Compile Include="Common\RelayCommand.cs" />
-    <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Common\BindableBase.cs" />
+    <Compile Include="Common\Command.cs" />
+    <Compile Include="Common\Extensions.cs" />
+    <Compile Include="Common\ViewModel.cs" />
     <Compile Include="Libraries\YoutubeExtractor\AacAudioExtractor.cs" />
     <Compile Include="Libraries\YoutubeExtractor\AdaptiveType.cs" />
     <Compile Include="Libraries\YoutubeExtractor\AudioDownloader.cs" />
