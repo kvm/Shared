@@ -1,4 +1,5 @@
 ﻿using System;
+using YoutubeDownloader.Libraries.YoutubeExtractor.MediaLibrary;
 
 namespace YoutubeExtractor
 {
@@ -11,40 +12,27 @@ namespace YoutubeExtractor
         /// Initializes a new instance of the <see cref="Downloader"/> class.
         /// </summary>
         /// <param name="video">The video to download/convert.</param>
-        /// <param name="savePath">The path to save the video/audio.</param>
+        /// <param name="filename">The path to save the video/audio.</param>
         /// /// <param name="bytesToDownload">An optional value to limit the number of bytes to download.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="video"/> or <paramref name="savePath"/> is <c>null</c>.</exception>
-        protected Downloader(VideoInfo video, string savePath, int? bytesToDownload = null)
+        /// <exception cref="ArgumentNullException"><paramref name="video"/> or <paramref name="filename"/> is <c>null</c>.</exception>
+        protected Downloader(VideoInfo video, string filename, int? bytesToDownload = null)
         {
             if (video == null)
                 throw new ArgumentNullException("video");
 
-            if (savePath == null)
+            if (filename == null)
                 throw new ArgumentNullException("savePath");
 
             this.Video = video;
-            this.SavePath = savePath;
+            this.SavePath = filename;
             this.BytesToDownload = bytesToDownload;
+            this.Track = new MediaTrack(video.DownloadUrl, filename, MediaItemType.Video);
         }
 
-        /// <summary>
-        /// Occurs when the download finished.
-        /// </summary>
         public event EventHandler DownloadFinished;
-
-        /// <summary>
-        /// Occurs when the download is starts.
-        /// </summary>
         public event EventHandler DownloadStarted;
 
-        /// <summary>
-        /// Gets the number of bytes to download. <c>null</c>, if everything is downloaded.
-        /// </summary>
         public int? BytesToDownload { get; private set; }
-
-        /// <summary>
-        /// Gets the path to save the video/audio.
-        /// </summary>
         public string SavePath { get; private set; }
 
         /// <summary>
@@ -52,17 +40,20 @@ namespace YoutubeExtractor
         /// </summary>
         public VideoInfo Video { get; private set; }
 
+        public MediaTrack Track { get; private set; }
+
         /// <summary>
         /// Starts the work of the <see cref="Downloader"/>.
         /// </summary>
         public abstract void Execute();
 
-        protected void OnDownloadFinished(EventArgs e)
+        protected void OnDownloadFinished(EventArgs e, bool fcancel, int bytesDownloaded)
         {
             if (this.DownloadFinished != null)
             {
                 this.DownloadFinished(this, e);
             }
+            MediaLogger.OnMediaDownloadCompleted(this.Track, fcancel, bytesDownloaded);
         }
 
         protected void OnDownloadStarted(EventArgs e)
@@ -71,6 +62,7 @@ namespace YoutubeExtractor
             {
                 this.DownloadStarted(this, e);
             }
+            MediaLogger.OnMediaDownloadStarted(this.Track);
         }
     }
 }

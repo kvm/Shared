@@ -74,7 +74,7 @@ namespace YoutubeExtractor
                 this.ExtractAudio(tempPath);
             }
 
-            this.OnDownloadFinished(EventArgs.Empty);
+            this.OnDownloadFinished(EventArgs.Empty, this.isCanceled, this.BytesToDownload.Value);
         }
 
         private void DownloadVideo(string path)
