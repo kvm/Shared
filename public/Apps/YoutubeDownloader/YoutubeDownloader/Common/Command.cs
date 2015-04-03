@@ -2,7 +2,7 @@
 //     Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 
-namespace Tabs.Common {
+namespace YoutubeDownloader.Common {
     using System;
     using System.Windows.Input;
 
