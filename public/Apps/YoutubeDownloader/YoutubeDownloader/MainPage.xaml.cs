@@ -44,7 +44,7 @@ namespace YoutubeDownloader {
                 "1080p"
             };
 
-            DownloadVideoButton_Click(null, null);
+            //DownloadVideoButton_Click(null, null);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace YoutubeDownloader {
         /// Navigates to the initial home page.
         /// </summary>
         private void DownloadVideoButton_Click(object sender, RoutedEventArgs e) {
-            string link = "https://www.youtube.com/watch?v=fcPWU59Luoc";
+            string link = currentUri;
 
             /*
              * Get the available video formats.
@@ -163,6 +163,16 @@ namespace YoutubeDownloader {
              * For GUI applications note, that this method runs synchronously.
              */
             videoDownloader.Execute();
+        }
+
+        private void WebViewControl_LoadCompleted(object sender, NavigationEventArgs e) {
+            var webView = sender as WebView;
+            currentUri = webView.Source.ToString();
+        }
+
+        private void WebViewControl_FrameDOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args) {
+            //var webView = sender as WebView;
+            currentUri = sender.Source.ToString();
         }
     }
 }

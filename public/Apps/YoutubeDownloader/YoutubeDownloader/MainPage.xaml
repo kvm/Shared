@@ -6,12 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <WebView x:Name="WebViewControl"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
-             NavigationCompleted="Browser_NavigationCompleted" />
+             NavigationCompleted="Browser_NavigationCompleted" LoadCompleted="WebViewControl_LoadCompleted" FrameDOMContentLoaded="WebViewControl_FrameDOMContentLoaded" />
 
     <Page.BottomAppBar>
         <CommandBar>
@@ -22,6 +23,25 @@
                     Click="ForwardAppBarButton_Click"
                     Icon="Forward"
                     Label="forward"/>
+                <AppBarButton x:Name="VideoDownloadButton" Icon="Download">
+                    <AppBarButton.Flyout>
+                        <ListPickerFlyout ItemsSource="{Binding VideoFormats}">
+                            <!--<ListPickerFlyout.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding VideoFormats}"></TextBlock>
+                                </DataTemplate>
+                            </ListPickerFlyout.ItemTemplate>-->
+                        </ListPickerFlyout>
+                        <!--<MenuFlyout>
+                            <MenuFlyout.Items>
+                                <MenuFlyoutItem Text="Hello"></MenuFlyoutItem>
+                                <MenuFlyoutItem Text="Hello"></MenuFlyoutItem>
+                                <MenuFlyoutItem Text="Hello"></MenuFlyoutItem>
+                                <MenuFlyoutItem Text="Hello"></MenuFlyoutItem>
+                            </MenuFlyout.Items>
+                        </MenuFlyout>-->
+                    </AppBarButton.Flyout>
+                </AppBarButton>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton
