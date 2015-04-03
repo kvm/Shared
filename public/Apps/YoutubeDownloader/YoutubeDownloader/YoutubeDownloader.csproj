@@ -107,6 +107,8 @@
     <Compile Include="Libraries\YoutubeExtractor\FlvFile.cs" />
     <Compile Include="Libraries\YoutubeExtractor\HttpHelper.cs" />
     <Compile Include="Libraries\YoutubeExtractor\IAudioExtractor.cs" />
+    <Compile Include="Libraries\YoutubeExtractor\MediaLibrary\MediaLogger.cs" />
+    <Compile Include="Libraries\YoutubeExtractor\MediaLibrary\MediaTrack.cs" />
     <Compile Include="Libraries\YoutubeExtractor\Mp3AudioExtractor.cs" />
     <Compile Include="Libraries\YoutubeExtractor\ProgressEventArgs.cs" />
     <Compile Include="Libraries\YoutubeExtractor\VideoDownloader.cs" />
@@ -152,7 +154,6 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Libraries\YoutubeExtractor\bin\Debug\Full\" />
     <Folder Include="Libraries\YoutubeExtractor\obj\Debug\Full\TempPE\" />
   </ItemGroup>
   <ItemGroup>
