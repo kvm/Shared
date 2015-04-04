@@ -45,7 +45,7 @@ namespace YoutubeDownloader.ViewModels {
             string leftPart, rightPart;
             string[] tokens = url.Split(new char[] { '?' });
 
-            if(tokens.Count == 2)
+            if(tokens.Length == 2)
             {
                 leftPart = tokens[0];
                 rightPart = tokens[1];

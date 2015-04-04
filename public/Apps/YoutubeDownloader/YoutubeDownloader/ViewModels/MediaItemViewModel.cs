@@ -15,13 +15,13 @@ namespace YoutubeDownloader.ViewModels
         public string HeaderText
         {
             get { return headerText; }
-            set { headerText = value; }
+            set { this.SetProperty(ref this.headerText, value); }
         }
 
         public string SubHeaderText
         {
             get { return subheaderText; }
-            set { subheaderText = value; }
+            set { this.SetProperty(ref this.subheaderText, value); }
         }
     }
 }

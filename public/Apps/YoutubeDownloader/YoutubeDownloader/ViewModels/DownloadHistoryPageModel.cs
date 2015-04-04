@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 using YoutubeDownloader.Libraries.YoutubeExtractor.MediaLibrary;
 
 namespace YoutubeDownloader.ViewModels
@@ -37,14 +39,17 @@ namespace YoutubeDownloader.ViewModels
 
         public static void UpdateMediaDownloadProgress(MediaTrack track, int progress)
         {
-            if (track.MediaType == MediaItemType.Video && videopivotItemViewModel != null)
+            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                videopivotItemViewModel.UpdateDownloadProgress(track, progress);
-            }
-            else if (track.MediaType == MediaItemType.Audio && audiopivotItemViewModel != null)
-            {
-                //
-            }
+                if (track.MediaType == MediaItemType.Video && videopivotItemViewModel != null)
+                {
+                    videopivotItemViewModel.UpdateDownloadProgress(track, progress);
+                }
+                else if (track.MediaType == MediaItemType.Audio && audiopivotItemViewModel != null)
+                {
+                    //
+                }
+            });
         }
     }
 }
