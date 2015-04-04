@@ -60,6 +60,11 @@
                     x:Uid="DownloadVideoButton"
                     Click="DownloadVideoButton_Click"
                     Label="Download Video"/>
+                <AppBarButton
+                    x:Name="DownloadHistoryButton"
+                    x:Uid="DownloadHistoryButton"
+                    Click="DownloadHistoryButton_Click"
+                    Label="Download History"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

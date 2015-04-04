@@ -185,11 +185,17 @@ namespace YoutubeDownloader {
              */
             videoDownloader.Execute();
         }
+<<<<<<< HEAD
 
         private void WebViewControl_FrameContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
         {
             currentUri = sender.Source.ToString();
             this.viewModel.FetchVideoFormatsForVideo(currentUri);
+=======
+        private void DownloadHistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(DownloadHistoryPage));
+>>>>>>> f146f91c5c7cfa85454dc6ae1a419f1180d64703
         }
     }
 }

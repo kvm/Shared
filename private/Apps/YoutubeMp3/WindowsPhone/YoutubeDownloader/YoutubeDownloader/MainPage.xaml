@@ -22,6 +22,16 @@
                     Click="ForwardAppBarButton_Click"
                     Icon="Forward"
                     Label="forward"/>
+                <AppBarButton x:Name="VideoFormats"
+                              Icon="Download">
+                    <AppBarButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="240p"></MenuFlyoutItem>
+                            <MenuFlyoutItem Text="480p"></MenuFlyoutItem>
+                            <MenuFlyoutItem Text="720p"></MenuFlyoutItem>
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton

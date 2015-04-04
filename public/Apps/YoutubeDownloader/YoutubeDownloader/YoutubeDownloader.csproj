@@ -83,7 +83,6 @@
     <None Include="Libraries\YoutubeExtractor\obj\Debug\Full\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="Libraries\YoutubeExtractor\packages.YoutubeExtractor.config" />
     <None Include="Libraries\YoutubeExtractor\packages.YoutubeExtractor_Portable.config" />
-    <None Include="Libraries\YoutubeExtractor\YoutubeExtractor.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -91,12 +90,21 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\BindableBase.cs" />
+<<<<<<< HEAD
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\VideoInfoToNameConverter.cs" />
+=======
+    <Compile Include="Common\Command.cs" />
+    <Compile Include="Common\Extensions.cs" />
+    <Compile Include="Common\ViewModel.cs" />
+    <Compile Include="DownloadHistoryPage.xaml.cs">
+      <DependentUpon>DownloadHistoryPage.xaml</DependentUpon>
+    </Compile>
+>>>>>>> f146f91c5c7cfa85454dc6ae1a419f1180d64703
     <Compile Include="Libraries\YoutubeExtractor\AacAudioExtractor.cs" />
     <Compile Include="Libraries\YoutubeExtractor\AdaptiveType.cs" />
     <Compile Include="Libraries\YoutubeExtractor\AudioDownloader.cs" />
@@ -123,7 +131,17 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+=======
+    <Compile Include="ViewModels\AudioPivotItemViewModel.cs" />
+    <Compile Include="ViewModels\DownloadHistoryPageModel.cs" />
+    <Compile Include="ViewModels\MediaItemViewModel.cs" />
+    <Compile Include="ViewModels\PageModel.cs" />
+    <Compile Include="ViewModels\PageModelBase.cs" />
+    <Compile Include="ViewModels\PageModelSettings.cs" />
+    <Compile Include="ViewModels\VideoPivotItemViewModel.cs" />
+>>>>>>> f146f91c5c7cfa85454dc6ae1a419f1180d64703
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -139,14 +157,16 @@
     <Content Include="Assets\WideLogo.scale-240.png" />
     <Content Include="Html\css\phone.css" />
     <Content Include="Html\index.html" />
-    <Content Include="Libraries\YoutubeExtractor\YoutubeExtractor.csproj" />
-    <Content Include="Libraries\YoutubeExtractor\YoutubeExtractor_Portable.csproj" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="DownloadHistoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
