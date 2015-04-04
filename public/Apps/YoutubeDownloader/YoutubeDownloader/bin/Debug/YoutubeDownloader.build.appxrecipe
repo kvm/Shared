@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>CHOPRA</Machine>
+    <WindowsUser>anichopr</WindowsUser>
+    <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>dfcebfac-18db-4314-a03b-ea2b2d2bcbb0</PackageIdentityName>
+    <IntermediateOutputPath>C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\obj\Debug\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\bin\Debug\YoutubeDownloader.exe">
+      <PackagePath>YoutubeDownloader.exe</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll">
+      <PackagePath>Newtonsoft.Json.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\Assets\Logo.scale-240.png">
+      <PackagePath>Assets\Logo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\Assets\SmallLogo.scale-240.png">
+      <PackagePath>Assets\SmallLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\Assets\SplashScreen.scale-240.png">
+      <PackagePath>Assets\SplashScreen.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\Assets\Square71x71Logo.scale-240.png">
+      <PackagePath>Assets\Square71x71Logo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\Assets\StoreLogo.scale-240.png">
+      <PackagePath>Assets\StoreLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\Assets\WideLogo.scale-240.png">
+      <PackagePath>Assets\WideLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\Html\css\phone.css">
+      <PackagePath>Html\css\phone.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\Html\index.html">
+      <PackagePath>Html\index.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\bin\Debug\DownloadHistoryPage.xbf">
+      <PackagePath>DownloadHistoryPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\bin\Debug\YoutubeDownloader.xr.xml">
+      <PackagePath>YoutubeDownloader.xr.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\anichopr\Documents\YoutubeDownloader\Shared\public\Apps\YoutubeDownloader\YoutubeDownloader\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
