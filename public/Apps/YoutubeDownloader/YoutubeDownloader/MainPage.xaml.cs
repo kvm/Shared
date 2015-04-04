@@ -191,5 +191,9 @@ namespace YoutubeDownloader {
             currentUri = sender.Source.ToString();
             this.viewModel.FetchVideoFormatsForVideo(currentUri);
         }
+        private void DownloadHistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(DownloadHistoryPage));
+        }
     }
 }

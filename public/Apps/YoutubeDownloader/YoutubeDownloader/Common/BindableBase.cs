@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace YoutubeDownloader.Common {
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
 
-namespace YoutubeDownloader.Common
-{
-    public class BindableBase: INotifyPropertyChanged
-    {
+    /// <summary>
+    /// Implementation of <see cref="INotifyPropertyChanged"/> to simplify models.
+    /// </summary>
+    public abstract class BindableBase : INotifyPropertyChanged {
         /// <summary>
-        /// Multicast event for property change notifications.
+        /// Raised to indicate that the value of one of this instance's properties has been changed.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -27,13 +23,14 @@ namespace YoutubeDownloader.Common
         /// support CallerMemberName.</param>
         /// <returns>True if the value was changed, false if the existing value matched the
         /// desired value.</returns>
-        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] String propertyName = null)
-        {
-            if (object.Equals(storage, value)) return false;
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null) {
+            bool isDifferent = !object.Equals(storage, value);
+            if (isDifferent) {
+                storage = value;
+                this.NotifyPropertyChanged(propertyName);
+            }
 
-            storage = value;
-            this.OnPropertyChanged(propertyName);
-            return true;
+            return isDifferent;
         }
 
         /// <summary>
@@ -42,13 +39,19 @@ namespace YoutubeDownloader.Common
         /// <param name="propertyName">Name of the property used to notify listeners.  This
         /// value is optional and can be provided automatically when invoked from compilers
         /// that support <see cref="CallerMemberNameAttribute"/>.</param>
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = null) {
             var eventHandler = this.PropertyChanged;
-            if (eventHandler != null)
-            {
+            if (eventHandler != null) {
                 eventHandler(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        /// <summary>
+        /// Notifies listeners that all property values have potentially changed.
+        /// </summary>
+        protected void NotifyPropertiesChanged() {
+            // A null property name causes any registered listener to fire.
+            this.NotifyPropertyChanged();
         }
     }
 }
