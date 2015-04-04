@@ -1,4 +1,3 @@
-﻿
 namespace YoutubeDownloader.Common {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
+using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -25,6 +25,28 @@ namespace YoutubeDownloader {
         // TODO: Replace with your URL here.
         private static readonly Uri HomeUri = new Uri("https://m.youtube.com", UriKind.Absolute);
         private string currentUri;
+
+        public List<string> VideoFormats { get; set; }
+
+        public List<VideoInfo> VideoInfos { get; set; }
+
+        private ViewModels.MainPageViewModel viewModel;
+
+        public ViewModels.MainPageViewModel ViewModel
+        {
+            get
+            {
+                if (viewModel == null)
+                {
+                    viewModel = new ViewModels.MainPageViewModel();
+                }
+                return viewModel;
+            }
+
+            set { viewModel = value; }
+        }
+        
+
         public MainPage() {
             this.InitializeComponent();
             MediaLogger.OpenLogFileAndLoadTracks(true);
@@ -32,6 +54,18 @@ namespace YoutubeDownloader {
 
             WebViewControl.NavigationCompleted += webView_NavigationCompleted;
             this.NavigationCacheMode = NavigationCacheMode.Required;
+
+            VideoFormats = new List<string>
+            {
+                "240p",
+                "360p",
+                "480p",
+                "720p",
+                "1080p"
+            };
+
+            this.DataContext = this.ViewModel;
+            //DownloadVideoButton_Click(null, null);
         }
 
         /// <summary>
@@ -114,12 +148,18 @@ namespace YoutubeDownloader {
              * Get the available video formats.
              * We'll work with them in the video and audio download examples.
              */
-            IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link);
+            this.VideoInfos = DownloadUrlResolver.GetDownloadUrls(link).ToList();
             /*
              * Select the first .mp4 video with 360p resolution
              */
-            VideoInfo video = videoInfos
+            VideoInfo video = VideoInfos
                 .First(info => info.VideoType == VideoType.Mp4 && info.Resolution == 360);
+
+            this.VideoFormats.Clear();
+
+            foreach (var videoInfo in VideoInfos) {
+                this.VideoFormats.Add(string.Concat(videoInfo.Title.ToString(), ".", videoInfo.VideoExtension, ", ", videoInfo.Resolution, "p"));
+            }
 
             /*
              * If the video has a decrypted signature, decipher it
@@ -144,6 +184,12 @@ namespace YoutubeDownloader {
              * For GUI applications note, that this method runs synchronously.
              */
             videoDownloader.Execute();
+        }
+
+        private void WebViewControl_FrameContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
+        {
+            currentUri = sender.Source.ToString();
+            this.viewModel.FetchVideoFormatsForVideo(currentUri);
         }
         private void DownloadHistoryButton_Click(object sender, RoutedEventArgs e)
         {

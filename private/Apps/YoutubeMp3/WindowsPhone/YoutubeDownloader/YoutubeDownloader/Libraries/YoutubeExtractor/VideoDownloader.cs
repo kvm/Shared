@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace YoutubeExtractor
 {
@@ -47,9 +48,11 @@ namespace YoutubeExtractor
             {
                 using (Stream source = response.GetResponseStream())
                 {
-                    StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
-                    StorageFile targetFile = await folder.CreateFileAsync("sample.mp4", CreationCollisionOption.ReplaceExisting);
+                    //StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                    StorageFolder folder = KnownFolders.VideosLibrary;
+                    StorageFile targetFile = await folder.CreateFileAsync("sample1.mp4", CreationCollisionOption.ReplaceExisting);
 
+                    //var files = await folder.GetFilesAsync();
 
                     var buffer = new byte[1024];
                     bool cancel = false;
@@ -58,7 +61,14 @@ namespace YoutubeExtractor
 
                     while (!cancel && (bytes = source.Read(buffer, 0, buffer.Length)) > 0)
                     {
-                        await Windows.Storage.FileIO.WriteBytesAsync(targetFile, buffer);
+                        using (Stream f = await KnownFolders.VideosLibrary.OpenStreamForWriteAsync
+                                ("sample1.mp4", CreationCollisionOption.OpenIfExists))
+                        {
+                            f.Seek(0, SeekOrigin.End);
+                            await f.WriteAsync(buffer, 0, bytes);
+                        }
+
+                        //await Windows.Storage.FileIO.WriteBytesAsync(targetFile, buffer);
 
                         copiedBytes += bytes;
 
