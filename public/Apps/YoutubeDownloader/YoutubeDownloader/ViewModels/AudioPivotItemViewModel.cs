@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YoutubeDownloader.Common;
 using Windows.UI.Xaml;
+using YoutubeDownloader.Libraries.YoutubeExtractor.MediaLibrary;
 
 namespace YoutubeDownloader.ViewModels
 {
@@ -27,17 +28,28 @@ namespace YoutubeDownloader.ViewModels
                 if (null == this.groupedAudio)
                 {
                     var songs = new ObservableCollection<MediaItemViewModel>();
+                    int countAudiosDownloaded = MediaLogger.m_audioTracks.Count;
 
-                    for (uint i = 0; i < 10; i++)
+                    for (int i = 0; i < countAudiosDownloaded; i++)
                     {
-                        var vm = new MediaItemViewModel();
-                        vm.HeaderText = "Tu hi mera mera";
-                        vm.SubHeaderText = "24.16Mb";
-                        songs.Add(vm);
+                        MediaItemViewModel mediaItemViewModel = new MediaItemViewModel();
+                        MediaTrack track = MediaLogger.m_audioTracks[i];
+                        mediaItemViewModel.HeaderText = track.Title;
+                        if (track.DownldStatus == DownloadStatus.Completed)
+                            mediaItemViewModel.SubHeaderText = ((double)track.Size / 1000000).ToString() + "Mb";
+                        else if (track.DownldStatus == DownloadStatus.Canceled)
+                            mediaItemViewModel.SubHeaderText = "Canceled";
+                        else if (track.DownldStatus == DownloadStatus.Downloading)
+                            mediaItemViewModel.SubHeaderText = "Downloading...";
+
+                        songs.Add(mediaItemViewModel);
                     }
 
                     this.groupedAudio = songs;
-                    this.ShowNoAudioDownloadedText = Visibility.Collapsed;
+                    if (countAudiosDownloaded == 0)
+                        this.ShowNoAudioDownloadedText = Visibility.Visible;
+                    else
+                        this.ShowNoAudioDownloadedText = Visibility.Collapsed;
                 }
 
                 return this.groupedAudio;

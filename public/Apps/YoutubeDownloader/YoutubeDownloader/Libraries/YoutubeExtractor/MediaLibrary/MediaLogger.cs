@@ -11,8 +11,8 @@ namespace YoutubeDownloader.Libraries.YoutubeExtractor.MediaLibrary
 {
     class MediaLogger
     {
-        private static List<MediaTrack> m_audioTracks = new List<MediaTrack>();
-        private static List<MediaTrack> m_videoTracks = new List<MediaTrack>();
+        public static List<MediaTrack> m_audioTracks = new List<MediaTrack>();
+        public static List<MediaTrack> m_videoTracks = new List<MediaTrack>();
 
         public async static Task OpenLogFileAndLoadTracks(bool fLoadVideoTracks) 
         {
