@@ -30,6 +30,23 @@ namespace YoutubeDownloader {
 
         public List<VideoInfo> VideoInfos { get; set; }
 
+        private ViewModels.MainPageViewModel viewModel;
+
+        public ViewModels.MainPageViewModel ViewModel
+        {
+            get
+            {
+                if (viewModel == null)
+                {
+                    viewModel = new ViewModels.MainPageViewModel();
+                }
+                return viewModel;
+            }
+
+            set { viewModel = value; }
+        }
+        
+
         public MainPage() {
             this.InitializeComponent();
             MediaLogger.OpenLogFileAndLoadTracks(true);
@@ -47,6 +64,7 @@ namespace YoutubeDownloader {
                 "1080p"
             };
 
+            this.DataContext = this.ViewModel;
             //DownloadVideoButton_Click(null, null);
         }
 
@@ -168,14 +186,10 @@ namespace YoutubeDownloader {
             videoDownloader.Execute();
         }
 
-        private void WebViewControl_LoadCompleted(object sender, NavigationEventArgs e) {
-            var webView = sender as WebView;
-            currentUri = webView.Source.ToString();
-        }
-
-        private void WebViewControl_FrameDOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args) {
-            //var webView = sender as WebView;
+        private void WebViewControl_FrameContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
+        {
             currentUri = sender.Source.ToString();
+            this.viewModel.FetchVideoFormatsForVideo(currentUri);
         }
     }
 }
