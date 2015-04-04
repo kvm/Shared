@@ -145,5 +145,9 @@ namespace YoutubeDownloader {
              */
             videoDownloader.Execute();
         }
+        private void DownloadHistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(DownloadHistoryPage));
+        }
     }
 }
