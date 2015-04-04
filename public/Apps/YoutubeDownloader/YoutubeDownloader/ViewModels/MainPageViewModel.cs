@@ -52,7 +52,7 @@ namespace YoutubeDownloader.ViewModels {
 
                 if(leftPart.EndsWith("watch"))
                 {
-                    uri.AbsolutePath
+                    //uri.AbsolutePath
                 }
             }
 
