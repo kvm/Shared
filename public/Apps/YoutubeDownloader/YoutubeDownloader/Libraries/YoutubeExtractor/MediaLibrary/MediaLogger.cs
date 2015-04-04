@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using YoutubeDownloader.ViewModels;
 
 namespace YoutubeDownloader.Libraries.YoutubeExtractor.MediaLibrary
 {
@@ -13,6 +14,9 @@ namespace YoutubeDownloader.Libraries.YoutubeExtractor.MediaLibrary
     {
         public static List<MediaTrack> m_audioTracks = new List<MediaTrack>();
         public static List<MediaTrack> m_videoTracks = new List<MediaTrack>();
+
+        public static List<MediaTrack> m_downloadingVideoTracks = new List<MediaTrack>();
+        public static List<MediaTrack> m_downloadingAudioTracks = new List<MediaTrack>();
 
         public async static Task OpenLogFileAndLoadTracks(bool fLoadVideoTracks) 
         {
@@ -54,13 +58,13 @@ namespace YoutubeDownloader.Libraries.YoutubeExtractor.MediaLibrary
         {
             if (track.MediaType == MediaItemType.Video)
             {
+                m_downloadingVideoTracks.Insert(0, track);
                 m_videoTracks.Insert(0, track);
-                SaveTracksBackToFile(true);
             }
             else if (track.MediaType == MediaItemType.Audio)
             {
+                m_downloadingAudioTracks.Insert(0, track);
                 m_audioTracks.Insert(0, track);
-                SaveTracksBackToFile(false);
             }
         }
 
@@ -68,7 +72,19 @@ namespace YoutubeDownloader.Libraries.YoutubeExtractor.MediaLibrary
         {
             track.Size = downloadedBytes;
             track.DownldStatus = fcancel ? DownloadStatus.Canceled : DownloadStatus.Completed;
+            DownloadHistoryPageModel.UpdateMediaDownloadProgress(track, 100);
+
+            // Save the tracks to history files
+            if (track.MediaType == MediaItemType.Video)
+            {
+                m_downloadingVideoTracks.Remove(track);
+                SaveTracksBackToFile(true);
+            }
+            else if (track.MediaType == MediaItemType.Audio)
+            {
+                m_downloadingAudioTracks.Remove(track);
+                SaveTracksBackToFile(false);
+            }
         }
     }
-
 }

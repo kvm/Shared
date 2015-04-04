@@ -28,9 +28,9 @@ namespace YoutubeDownloader.ViewModels
                 if (null == this.groupedAudio)
                 {
                     var songs = new ObservableCollection<MediaItemViewModel>();
-                    int countAudiosDownloaded = MediaLogger.m_audioTracks.Count;
+                    int countDownloadedAudios = MediaLogger.m_audioTracks.Count;
 
-                    for (int i = 0; i < countAudiosDownloaded; i++)
+                    for (int i = 0; i < countDownloadedAudios; i++)
                     {
                         MediaItemViewModel mediaItemViewModel = new MediaItemViewModel();
                         MediaTrack track = MediaLogger.m_audioTracks[i];
@@ -46,7 +46,7 @@ namespace YoutubeDownloader.ViewModels
                     }
 
                     this.groupedAudio = songs;
-                    if (countAudiosDownloaded == 0)
+                    if (countDownloadedAudios == 0)
                         this.ShowNoAudioDownloadedText = Visibility.Visible;
                     else
                         this.ShowNoAudioDownloadedText = Visibility.Collapsed;

@@ -16,11 +16,13 @@ namespace YoutubeDownloader.ViewModels
     {
         private ObservableCollection<MediaItemViewModel> groupedVideo;
         private Visibility showNoVideoDownloadedText;
+        Dictionary<MediaTrack, MediaItemViewModel> m_mapMediaTrackToView;
 
         public VideoPivotItemViewModel()
         {
             this.showNoVideoDownloadedText = Visibility.Visible;
             this.groupedVideo = null;
+            m_mapMediaTrackToView = new Dictionary<MediaTrack, MediaItemViewModel>();
         }
 
         public ObservableCollection<MediaItemViewModel> GroupedVideo
@@ -30,9 +32,9 @@ namespace YoutubeDownloader.ViewModels
                 if (null == this.groupedVideo)
                 {
                     var songs = new ObservableCollection<MediaItemViewModel>();
-                    int countVideosDownloaded = MediaLogger.m_videoTracks.Count;
+                    int countDownloadedVideos = MediaLogger.m_videoTracks.Count;
 
-                    for (int i = 0; i < countVideosDownloaded; i++)
+                    for (int i = 0; i < countDownloadedVideos; i++)
                     {
                         var vm = new MediaItemViewModel();
                         MediaTrack track = MediaLogger.m_videoTracks[i];
@@ -44,10 +46,11 @@ namespace YoutubeDownloader.ViewModels
                         else if (track.DownldStatus == DownloadStatus.Downloading)
                             vm.SubHeaderText = "Downloading...";
                         songs.Add(vm);
+                        m_mapMediaTrackToView[track] = vm;
                     }
 
                     this.groupedVideo = songs;
-                    if (countVideosDownloaded == 0)
+                    if (countDownloadedVideos == 0)
                         this.ShowNoVideoDownloadedText = Visibility.Visible;
                     else
                         this.ShowNoVideoDownloadedText = Visibility.Collapsed;
@@ -67,5 +70,22 @@ namespace YoutubeDownloader.ViewModels
             private set { this.SetProperty(ref this.showNoVideoDownloadedText, value); }
         }
 
+        public void UpdateDownloadProgress(MediaTrack track, int progress) {
+            if (m_mapMediaTrackToView != null)
+            {
+                MediaItemViewModel viewModel = m_mapMediaTrackToView[track];
+                if (viewModel != null)
+                {
+                    if (track.DownldStatus == DownloadStatus.Completed)
+                    {
+                        viewModel.SubHeaderText = ((double)track.Size/1000000).ToString() + "Mb";
+                    }
+                    else if (track.DownldStatus == DownloadStatus.Downloading)
+                    {
+                        // use progress interger to update the progress
+                    }
+                }
+            }
+        }
     }
 }

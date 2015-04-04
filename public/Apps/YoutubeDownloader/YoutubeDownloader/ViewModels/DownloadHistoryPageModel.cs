@@ -3,35 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YoutubeDownloader.Libraries.YoutubeExtractor.MediaLibrary;
 
 namespace YoutubeDownloader.ViewModels
 {
     public class DownloadHistoryPageModel : PageModel<PageModelSettings.None>
     {
-        private VideoPivotItemViewModel videopivotItemViewModel;
-        private AudioPivotItemViewModel audiopivotItemViewModel;
+        private static VideoPivotItemViewModel videopivotItemViewModel;
+        private static AudioPivotItemViewModel audiopivotItemViewModel;
 
         public DownloadHistoryPageModel()
         {
-            this.videopivotItemViewModel = new VideoPivotItemViewModel();
-            this.audiopivotItemViewModel = new AudioPivotItemViewModel();
+            videopivotItemViewModel = new VideoPivotItemViewModel();
+            audiopivotItemViewModel = new AudioPivotItemViewModel();
         }
 
         public VideoPivotItemViewModel VideoPivotViewModel
         {
-            get { return this.videopivotItemViewModel; }
-            set { this.SetProperty(ref this.videopivotItemViewModel, value); }
+            get { return videopivotItemViewModel; }
+            set { this.SetProperty(ref videopivotItemViewModel, value); }
         }
 
         public AudioPivotItemViewModel AudioPivotViewModel
         {
-            get { return this.audiopivotItemViewModel; }
-            set { this.SetProperty(ref this.audiopivotItemViewModel, value); }
+            get { return audiopivotItemViewModel; }
+            set { this.SetProperty(ref audiopivotItemViewModel, value); }
         }
 
         public override void Initialize(PageModelSettings.None settings)
         {
             this.VideoPivotViewModel.Initialize();
+        }
+
+        public static void UpdateMediaDownloadProgress(MediaTrack track, int progress)
+        {
+            if (track.MediaType == MediaItemType.Video && videopivotItemViewModel != null)
+            {
+                videopivotItemViewModel.UpdateDownloadProgress(track, progress);
+            }
+            else if (track.MediaType == MediaItemType.Audio && audiopivotItemViewModel != null)
+            {
+                //
+            }
         }
     }
 }
