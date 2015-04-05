@@ -26,10 +26,6 @@ namespace YoutubeDownloader {
         private static readonly Uri HomeUri = new Uri("https://m.youtube.com", UriKind.Absolute);
         private string currentUri;
 
-        public List<string> VideoFormats { get; set; }
-
-        public List<VideoInfo> VideoInfos { get; set; }
-
         private ViewModels.MainPageViewModel viewModel;
 
         public ViewModels.MainPageViewModel ViewModel
@@ -52,40 +48,8 @@ namespace YoutubeDownloader {
             MediaLogger.OpenLogFileAndLoadTracks(true);
             MediaLogger.OpenLogFileAndLoadTracks(false);
 
-            WebViewControl.NavigationCompleted += webView_NavigationCompleted;
             this.NavigationCacheMode = NavigationCacheMode.Required;
-
-            VideoFormats = new List<string>
-            {
-                "240p",
-                "360p",
-                "480p",
-                "720p",
-                "1080p"
-            };
-
             this.DataContext = this.ViewModel;
-            //DownloadVideoButton_Click(null, null);
-        }
-
-        /// <summary>
-        /// Event to indicate webview has completed the navigation, either with success or failure.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        void webView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args) {
-            if (args.IsSuccess) {
-                currentUri = (args.Uri != null) ? args.Uri.ToString() : "<null>";
-            }
-            else {
-                string url = "";
-                try { 
-                    url = args.Uri.ToString();
-                }
-                finally {
-                    currentUri = url;
-                }
-            }
         }
 
         /// <summary>
@@ -138,62 +102,20 @@ namespace YoutubeDownloader {
             WebViewControl.Navigate(HomeUri);
         }
 
-        /// <summary>
-        /// Navigates to the initial home page.
-        /// </summary>
-        private void DownloadVideoButton_Click(object sender, RoutedEventArgs e) {
-            string link = currentUri;
-
-            /*
-             * Get the available video formats.
-             * We'll work with them in the video and audio download examples.
-             */
-            this.VideoInfos = DownloadUrlResolver.GetDownloadUrls(link).ToList();
-            /*
-             * Select the first .mp4 video with 360p resolution
-             */
-            VideoInfo video = VideoInfos
-                .First(info => info.VideoType == VideoType.Mp4 && info.Resolution == 360);
-
-            this.VideoFormats.Clear();
-
-            foreach (var videoInfo in VideoInfos) {
-                this.VideoFormats.Add(string.Concat(videoInfo.Title.ToString(), ".", videoInfo.VideoExtension, ", ", videoInfo.Resolution, "p"));
-            }
-
-            /*
-             * If the video has a decrypted signature, decipher it
-             */
-            if (video.RequiresDecryption) {
-                DownloadUrlResolver.DecryptDownloadUrl(video);
-            }
-
-            /*
-             * Create the video downloader.
-             * The first argument is the video to download.
-             * The second argument is the path to save the video file.
-             */
-            var videoDownloader = new VideoDownloader(video, Path.Combine(video.Title + video.VideoExtension));
-
-            // TODO: anichopr
-            //// Register the ProgressChanged event and print the current progress
-            //videoDownloader.DownloadProgressChanged += (sender, args) => Console.WriteLine(args.ProgressPercentage);
-
-            /*
-             * Execute the video downloader.
-             * For GUI applications note, that this method runs synchronously.
-             */
-            videoDownloader.Execute();
-        }
-
-        private void WebViewControl_FrameContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
+        private async void WebViewControl_FrameContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
         {
-            currentUri = sender.Source.ToString();
+            currentUri = await sender.InvokeScriptAsync("eval", new String[] { "document.location.href;" });
             this.viewModel.FetchVideoFormatsForVideo(currentUri);
         }
+
         private void DownloadHistoryButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(DownloadHistoryPage));
+        }
+
+        private void DownloadVideoButton_Click(object sender, RoutedEventArgs e)
+        {
+            // todo: download video and store it in library
         }
     }
 }

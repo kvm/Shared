@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:YoutubeDownloader.Converters" 
     mc:Ignorable="d"
+    DataContext="{Binding ViewModel, RelativeSource={RelativeSource Mode=Self}}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <!--DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"-->
@@ -18,6 +19,7 @@
     
     <Page.Resources>
         <converters:VideoInfoToNameConverter x:Key="VideoInfoToName"></converters:VideoInfoToNameConverter>
+        <converters:BooleanToVisibilityConverter x:Key="boolToVisibility"></converters:BooleanToVisibilityConverter>
     </Page.Resources>
     
     <Page.BottomAppBar>
@@ -29,7 +31,7 @@
                     Click="ForwardAppBarButton_Click"
                     Icon="Forward"
                     Label="forward"/>
-                <AppBarButton x:Name="VideoDownloadButton" Icon="Download">
+                <AppBarButton x:Name="VideoDownloadButton" Icon="Download" Visibility="{Binding IsVideoDownloadable, Converter={StaticResource boolToVisibility}}">
                     <AppBarButton.Flyout>
                         <ListPickerFlyout ItemsSource="{Binding VideoInfos}">
                             <ListPickerFlyout.ItemTemplate>
