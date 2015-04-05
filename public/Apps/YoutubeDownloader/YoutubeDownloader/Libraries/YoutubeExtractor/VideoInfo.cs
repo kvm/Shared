@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using YoutubeDownloader.Common;
 
 namespace YoutubeExtractor
 {
-    public class VideoInfo
+    public class VideoInfo: IComparable<VideoInfo>
     {
         internal static IEnumerable<VideoInfo> Defaults = new List<VideoInfo>
         {
@@ -206,6 +208,29 @@ namespace YoutubeExtractor
         public override string ToString()
         {
             return string.Format("Full Title: {0}, Type: {1}, Resolution: {2}p", this.Title + this.VideoExtension, this.VideoType, this.Resolution);
+        }
+
+        public int CompareTo(VideoInfo other)
+        {
+            Dictionary<VideoType, int> formatRanks = new Dictionary<VideoType, int> { 
+                {VideoType.Mp4, 4},
+                {VideoType.WebM, 3},
+                {VideoType.Flash, 2},
+                {VideoType.Mobile, 1}
+            };
+
+            int rankV1 = 0, rankV2 = 0;
+            if (formatRanks.ContainsKey(this.VideoType))
+            {
+                rankV1 = formatRanks[this.VideoType];
+            }
+
+            if (formatRanks.ContainsKey(other.VideoType))
+            {
+                rankV2 = formatRanks[other.VideoType];
+            }
+
+            return rankV1.CompareTo(rankV2);
         }
     }
 }

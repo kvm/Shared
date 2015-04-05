@@ -5,14 +5,21 @@
     xmlns:local="using:YoutubeDownloader"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:YoutubeDownloader.Converters" 
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <!--DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"-->
 
     <WebView x:ConnectionId='1' x:Name="WebViewControl"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
-                                                               />
-
+                                                                                                                        />
+    
+    <Page.Resources>
+        <converters:VideoInfoToNameConverter x:Key="VideoInfoToName"></converters:VideoInfoToNameConverter>
+    </Page.Resources>
+    
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
@@ -22,6 +29,25 @@
                                                      
                     Icon="Forward"
                     Label="forward"/>
+                <AppBarButton x:Name="VideoDownloadButton" Icon="Download">
+                    <AppBarButton.Flyout>
+                        <ListPickerFlyout ItemsSource="{Binding VideoInfos}">
+                            <ListPickerFlyout.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource VideoInfoToName}}"></TextBlock>
+                                </DataTemplate>
+                            </ListPickerFlyout.ItemTemplate>
+                        </ListPickerFlyout>
+                        <!--<MenuFlyout>
+                            <MenuFlyout.Items>
+                                <MenuFlyoutItem Text="Hello"></MenuFlyoutItem>
+                                <MenuFlyoutItem Text="Hello"></MenuFlyoutItem>
+                                <MenuFlyoutItem Text="Hello"></MenuFlyoutItem>
+                                <MenuFlyoutItem Text="Hello"></MenuFlyoutItem>
+                            </MenuFlyout.Items>
+                        </MenuFlyout>-->
+                    </AppBarButton.Flyout>
+                </AppBarButton>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:ConnectionId='3'

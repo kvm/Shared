@@ -14,7 +14,7 @@ namespace YoutubeDownloader.Converters
         {
             var videoInfo = value as VideoInfo;
 
-            string title = string.Concat(videoInfo.Title, ".", videoInfo.VideoExtension, ", ", videoInfo.VideoType.ToString());
+            string title = string.Concat(videoInfo.Resolution, "p ", videoInfo.VideoType.ToString());
 
             return title;
         }
