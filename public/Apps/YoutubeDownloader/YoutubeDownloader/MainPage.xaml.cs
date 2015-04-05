@@ -104,12 +104,8 @@ namespace YoutubeDownloader {
 
         private async void WebViewControl_FrameContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
         {
-<<<<<<< HEAD
-            currentUri = sender.Source.ToString();
-=======
             currentUri = await sender.InvokeScriptAsync("eval", new String[] { "document.location.href;" });
             this.viewModel.FetchVideoFormatsForVideo(currentUri);
->>>>>>> 497882bca41f15299f8f220a15c2a1e4498ed4ef
         }
 
         private void DownloadHistoryButton_Click(object sender, RoutedEventArgs e)

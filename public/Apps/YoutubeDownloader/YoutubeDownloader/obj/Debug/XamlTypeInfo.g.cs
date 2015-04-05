@@ -124,47 +124,31 @@ namespace YoutubeDownloader.YoutubeDownloader_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[19];
+            _typeNameTable = new string[11];
             _typeNameTable[0] = "YoutubeDownloader.DownloadHistoryPage";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
             _typeNameTable[3] = "YoutubeDownloader.Converters.VideoInfoToNameConverter";
             _typeNameTable[4] = "Object";
-            _typeNameTable[5] = "YoutubeDownloader.MainPage";
-            _typeNameTable[6] = "System.Collections.Generic.List`1<String>";
-            _typeNameTable[7] = "String";
-            _typeNameTable[8] = "System.Collections.Generic.List`1<YoutubeExtractor.VideoInfo>";
-            _typeNameTable[9] = "YoutubeExtractor.VideoInfo";
-            _typeNameTable[10] = "YoutubeExtractor.AdaptiveType";
-            _typeNameTable[11] = "System.Enum";
-            _typeNameTable[12] = "System.ValueType";
-            _typeNameTable[13] = "Int32";
-            _typeNameTable[14] = "YoutubeExtractor.AudioType";
-            _typeNameTable[15] = "Boolean";
-            _typeNameTable[16] = "YoutubeExtractor.VideoType";
-            _typeNameTable[17] = "YoutubeDownloader.ViewModels.MainPageViewModel";
-            _typeNameTable[18] = "YoutubeDownloader.Common.BindableBase";
+            _typeNameTable[5] = "YoutubeDownloader.Converters.BooleanToVisibilityConverter";
+            _typeNameTable[6] = "YoutubeDownloader.MainPage";
+            _typeNameTable[7] = "YoutubeDownloader.ViewModels.MainPageViewModel";
+            _typeNameTable[8] = "YoutubeDownloader.ViewModels.PageModel`1<YoutubeDownloader.ViewModels.PageModelSettings.None>";
+            _typeNameTable[9] = "YoutubeDownloader.ViewModels.PageModelBase";
+            _typeNameTable[10] = "YoutubeDownloader.Common.BindableBase";
 
-            _typeTable = new global::System.Type[19];
+            _typeTable = new global::System.Type[11];
             _typeTable[0] = typeof(global::YoutubeDownloader.DownloadHistoryPage);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
             _typeTable[3] = typeof(global::YoutubeDownloader.Converters.VideoInfoToNameConverter);
             _typeTable[4] = typeof(global::System.Object);
-            _typeTable[5] = typeof(global::YoutubeDownloader.MainPage);
-            _typeTable[6] = typeof(global::System.Collections.Generic.List<global::System.String>);
-            _typeTable[7] = typeof(global::System.String);
-            _typeTable[8] = typeof(global::System.Collections.Generic.List<global::YoutubeExtractor.VideoInfo>);
-            _typeTable[9] = typeof(global::YoutubeExtractor.VideoInfo);
-            _typeTable[10] = typeof(global::YoutubeExtractor.AdaptiveType);
-            _typeTable[11] = typeof(global::System.Enum);
-            _typeTable[12] = typeof(global::System.ValueType);
-            _typeTable[13] = typeof(global::System.Int32);
-            _typeTable[14] = typeof(global::YoutubeExtractor.AudioType);
-            _typeTable[15] = typeof(global::System.Boolean);
-            _typeTable[16] = typeof(global::YoutubeExtractor.VideoType);
-            _typeTable[17] = typeof(global::YoutubeDownloader.ViewModels.MainPageViewModel);
-            _typeTable[18] = typeof(global::YoutubeDownloader.Common.BindableBase);
+            _typeTable[5] = typeof(global::YoutubeDownloader.Converters.BooleanToVisibilityConverter);
+            _typeTable[6] = typeof(global::YoutubeDownloader.MainPage);
+            _typeTable[7] = typeof(global::YoutubeDownloader.ViewModels.MainPageViewModel);
+            _typeTable[8] = typeof(global::YoutubeDownloader.ViewModels.PageModel<global::YoutubeDownloader.ViewModels.PageModelSettings.None>);
+            _typeTable[9] = typeof(global::YoutubeDownloader.ViewModels.PageModelBase);
+            _typeTable[10] = typeof(global::YoutubeDownloader.Common.BindableBase);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -201,22 +185,9 @@ namespace YoutubeDownloader.YoutubeDownloader_XamlTypeInfo
 
         private object Activate_0_DownloadHistoryPage() { return new global::YoutubeDownloader.DownloadHistoryPage(); }
         private object Activate_3_VideoInfoToNameConverter() { return new global::YoutubeDownloader.Converters.VideoInfoToNameConverter(); }
-        private object Activate_5_MainPage() { return new global::YoutubeDownloader.MainPage(); }
-        private object Activate_6_List() { return new global::System.Collections.Generic.List<global::System.String>(); }
-        private object Activate_8_List() { return new global::System.Collections.Generic.List<global::YoutubeExtractor.VideoInfo>(); }
-        private object Activate_17_MainPageViewModel() { return new global::YoutubeDownloader.ViewModels.MainPageViewModel(); }
-        private void VectorAdd_6_List(object instance, object item)
-        {
-            var collection = (global::System.Collections.Generic.ICollection<global::System.String>)instance;
-            var newItem = (global::System.String)item;
-            collection.Add(newItem);
-        }
-        private void VectorAdd_8_List(object instance, object item)
-        {
-            var collection = (global::System.Collections.Generic.ICollection<global::YoutubeExtractor.VideoInfo>)instance;
-            var newItem = (global::YoutubeExtractor.VideoInfo)item;
-            collection.Add(newItem);
-        }
+        private object Activate_5_BooleanToVisibilityConverter() { return new global::YoutubeDownloader.Converters.BooleanToVisibilityConverter(); }
+        private object Activate_6_MainPage() { return new global::YoutubeDownloader.MainPage(); }
+        private object Activate_7_MainPageViewModel() { return new global::YoutubeDownloader.ViewModels.MainPageViewModel(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -254,109 +225,41 @@ namespace YoutubeDownloader.YoutubeDownloader_XamlTypeInfo
                 xamlType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 5:   //  YoutubeDownloader.MainPage
+            case 5:   //  YoutubeDownloader.Converters.BooleanToVisibilityConverter
+                userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_5_BooleanToVisibilityConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 6:   //  YoutubeDownloader.MainPage
                 userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_5_MainPage;
-                userType.AddMemberName("VideoFormats");
-                userType.AddMemberName("VideoInfos");
+                userType.Activator = Activate_6_MainPage;
                 userType.AddMemberName("ViewModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 6:   //  System.Collections.Generic.List`1<String>
-                userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.CollectionAdd = VectorAdd_6_List;
+            case 7:   //  YoutubeDownloader.ViewModels.MainPageViewModel
+                userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("YoutubeDownloader.ViewModels.PageModel`1<YoutubeDownloader.ViewModels.PageModelSettings.None>"));
                 userType.SetIsReturnTypeStub();
-                xamlType = userType;
-                break;
-
-            case 7:   //  String
-                xamlType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlSystemBaseType(typeName, type);
-                break;
-
-            case 8:   //  System.Collections.Generic.List`1<YoutubeExtractor.VideoInfo>
-                userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.CollectionAdd = VectorAdd_8_List;
-                userType.SetIsReturnTypeStub();
-                xamlType = userType;
-                break;
-
-            case 9:   //  YoutubeExtractor.VideoInfo
-                userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.AddMemberName("AdaptiveType");
-                userType.AddMemberName("AudioBitrate");
-                userType.AddMemberName("AudioExtension");
-                userType.AddMemberName("AudioType");
-                userType.AddMemberName("CanExtractAudio");
-                userType.AddMemberName("DownloadUrl");
-                userType.AddMemberName("FormatCode");
-                userType.AddMemberName("Is3D");
-                userType.AddMemberName("RequiresDecryption");
-                userType.AddMemberName("Resolution");
-                userType.AddMemberName("Title");
-                userType.AddMemberName("VideoExtension");
-                userType.AddMemberName("VideoType");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 10:   //  YoutubeExtractor.AdaptiveType
-                userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
-                userType.AddEnumValue("None", global::YoutubeExtractor.AdaptiveType.None);
-                userType.AddEnumValue("Audio", global::YoutubeExtractor.AdaptiveType.Audio);
-                userType.AddEnumValue("Video", global::YoutubeExtractor.AdaptiveType.Video);
+            case 8:   //  YoutubeDownloader.ViewModels.PageModel`1<YoutubeDownloader.ViewModels.PageModelSettings.None>
+                userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("YoutubeDownloader.ViewModels.PageModelBase"));
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 11:   //  System.Enum
-                userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
-                xamlType = userType;
-                break;
-
-            case 12:   //  System.ValueType
-                userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                xamlType = userType;
-                break;
-
-            case 13:   //  Int32
-                xamlType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlSystemBaseType(typeName, type);
-                break;
-
-            case 14:   //  YoutubeExtractor.AudioType
-                userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
-                userType.AddEnumValue("Aac", global::YoutubeExtractor.AudioType.Aac);
-                userType.AddEnumValue("Mp3", global::YoutubeExtractor.AudioType.Mp3);
-                userType.AddEnumValue("Vorbis", global::YoutubeExtractor.AudioType.Vorbis);
-                userType.AddEnumValue("Unknown", global::YoutubeExtractor.AudioType.Unknown);
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 15:   //  Boolean
-                xamlType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlSystemBaseType(typeName, type);
-                break;
-
-            case 16:   //  YoutubeExtractor.VideoType
-                userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
-                userType.AddEnumValue("Mobile", global::YoutubeExtractor.VideoType.Mobile);
-                userType.AddEnumValue("Flash", global::YoutubeExtractor.VideoType.Flash);
-                userType.AddEnumValue("Mp4", global::YoutubeExtractor.VideoType.Mp4);
-                userType.AddEnumValue("WebM", global::YoutubeExtractor.VideoType.WebM);
-                userType.AddEnumValue("Unknown", global::YoutubeExtractor.VideoType.Unknown);
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 17:   //  YoutubeDownloader.ViewModels.MainPageViewModel
+            case 9:   //  YoutubeDownloader.ViewModels.PageModelBase
                 userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("YoutubeDownloader.Common.BindableBase"));
-                userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 18:   //  YoutubeDownloader.Common.BindableBase
+            case 10:   //  YoutubeDownloader.Common.BindableBase
                 userType = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.SetIsLocalType();
                 xamlType = userType;
@@ -366,97 +269,12 @@ namespace YoutubeDownloader.YoutubeDownloader_XamlTypeInfo
         }
 
 
-        private object get_0_MainPage_VideoFormats(object instance)
-        {
-            var that = (global::YoutubeDownloader.MainPage)instance;
-            return that.VideoFormats;
-        }
-        private void set_0_MainPage_VideoFormats(object instance, object Value)
-        {
-            var that = (global::YoutubeDownloader.MainPage)instance;
-            that.VideoFormats = (global::System.Collections.Generic.List<global::System.String>)Value;
-        }
-        private object get_1_MainPage_VideoInfos(object instance)
-        {
-            var that = (global::YoutubeDownloader.MainPage)instance;
-            return that.VideoInfos;
-        }
-        private void set_1_MainPage_VideoInfos(object instance, object Value)
-        {
-            var that = (global::YoutubeDownloader.MainPage)instance;
-            that.VideoInfos = (global::System.Collections.Generic.List<global::YoutubeExtractor.VideoInfo>)Value;
-        }
-        private object get_2_VideoInfo_AdaptiveType(object instance)
-        {
-            var that = (global::YoutubeExtractor.VideoInfo)instance;
-            return that.AdaptiveType;
-        }
-        private object get_3_VideoInfo_AudioBitrate(object instance)
-        {
-            var that = (global::YoutubeExtractor.VideoInfo)instance;
-            return that.AudioBitrate;
-        }
-        private object get_4_VideoInfo_AudioExtension(object instance)
-        {
-            var that = (global::YoutubeExtractor.VideoInfo)instance;
-            return that.AudioExtension;
-        }
-        private object get_5_VideoInfo_AudioType(object instance)
-        {
-            var that = (global::YoutubeExtractor.VideoInfo)instance;
-            return that.AudioType;
-        }
-        private object get_6_VideoInfo_CanExtractAudio(object instance)
-        {
-            var that = (global::YoutubeExtractor.VideoInfo)instance;
-            return that.CanExtractAudio;
-        }
-        private object get_7_VideoInfo_DownloadUrl(object instance)
-        {
-            var that = (global::YoutubeExtractor.VideoInfo)instance;
-            return that.DownloadUrl;
-        }
-        private object get_8_VideoInfo_FormatCode(object instance)
-        {
-            var that = (global::YoutubeExtractor.VideoInfo)instance;
-            return that.FormatCode;
-        }
-        private object get_9_VideoInfo_Is3D(object instance)
-        {
-            var that = (global::YoutubeExtractor.VideoInfo)instance;
-            return that.Is3D;
-        }
-        private object get_10_VideoInfo_RequiresDecryption(object instance)
-        {
-            var that = (global::YoutubeExtractor.VideoInfo)instance;
-            return that.RequiresDecryption;
-        }
-        private object get_11_VideoInfo_Resolution(object instance)
-        {
-            var that = (global::YoutubeExtractor.VideoInfo)instance;
-            return that.Resolution;
-        }
-        private object get_12_VideoInfo_Title(object instance)
-        {
-            var that = (global::YoutubeExtractor.VideoInfo)instance;
-            return that.Title;
-        }
-        private object get_13_VideoInfo_VideoExtension(object instance)
-        {
-            var that = (global::YoutubeExtractor.VideoInfo)instance;
-            return that.VideoExtension;
-        }
-        private object get_14_VideoInfo_VideoType(object instance)
-        {
-            var that = (global::YoutubeExtractor.VideoInfo)instance;
-            return that.VideoType;
-        }
-        private object get_15_MainPage_ViewModel(object instance)
+        private object get_0_MainPage_ViewModel(object instance)
         {
             var that = (global::YoutubeDownloader.MainPage)instance;
             return that.ViewModel;
         }
-        private void set_15_MainPage_ViewModel(object instance, object Value)
+        private void set_0_MainPage_ViewModel(object instance, object Value)
         {
             var that = (global::YoutubeDownloader.MainPage)instance;
             that.ViewModel = (global::YoutubeDownloader.ViewModels.MainPageViewModel)Value;
@@ -469,101 +287,11 @@ namespace YoutubeDownloader.YoutubeDownloader_XamlTypeInfo
 
             switch (longMemberName)
             {
-            case "YoutubeDownloader.MainPage.VideoFormats":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeDownloader.MainPage");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "VideoFormats", "System.Collections.Generic.List`1<String>");
-                xamlMember.Getter = get_0_MainPage_VideoFormats;
-                xamlMember.Setter = set_0_MainPage_VideoFormats;
-                break;
-            case "YoutubeDownloader.MainPage.VideoInfos":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeDownloader.MainPage");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "VideoInfos", "System.Collections.Generic.List`1<YoutubeExtractor.VideoInfo>");
-                xamlMember.Getter = get_1_MainPage_VideoInfos;
-                xamlMember.Setter = set_1_MainPage_VideoInfos;
-                break;
-            case "YoutubeExtractor.VideoInfo.AdaptiveType":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeExtractor.VideoInfo");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "AdaptiveType", "YoutubeExtractor.AdaptiveType");
-                xamlMember.Getter = get_2_VideoInfo_AdaptiveType;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "YoutubeExtractor.VideoInfo.AudioBitrate":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeExtractor.VideoInfo");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "AudioBitrate", "Int32");
-                xamlMember.Getter = get_3_VideoInfo_AudioBitrate;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "YoutubeExtractor.VideoInfo.AudioExtension":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeExtractor.VideoInfo");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "AudioExtension", "String");
-                xamlMember.Getter = get_4_VideoInfo_AudioExtension;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "YoutubeExtractor.VideoInfo.AudioType":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeExtractor.VideoInfo");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "AudioType", "YoutubeExtractor.AudioType");
-                xamlMember.Getter = get_5_VideoInfo_AudioType;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "YoutubeExtractor.VideoInfo.CanExtractAudio":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeExtractor.VideoInfo");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "CanExtractAudio", "Boolean");
-                xamlMember.Getter = get_6_VideoInfo_CanExtractAudio;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "YoutubeExtractor.VideoInfo.DownloadUrl":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeExtractor.VideoInfo");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "DownloadUrl", "String");
-                xamlMember.Getter = get_7_VideoInfo_DownloadUrl;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "YoutubeExtractor.VideoInfo.FormatCode":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeExtractor.VideoInfo");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "FormatCode", "Int32");
-                xamlMember.Getter = get_8_VideoInfo_FormatCode;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "YoutubeExtractor.VideoInfo.Is3D":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeExtractor.VideoInfo");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "Is3D", "Boolean");
-                xamlMember.Getter = get_9_VideoInfo_Is3D;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "YoutubeExtractor.VideoInfo.RequiresDecryption":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeExtractor.VideoInfo");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "RequiresDecryption", "Boolean");
-                xamlMember.Getter = get_10_VideoInfo_RequiresDecryption;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "YoutubeExtractor.VideoInfo.Resolution":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeExtractor.VideoInfo");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "Resolution", "Int32");
-                xamlMember.Getter = get_11_VideoInfo_Resolution;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "YoutubeExtractor.VideoInfo.Title":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeExtractor.VideoInfo");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "Title", "String");
-                xamlMember.Getter = get_12_VideoInfo_Title;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "YoutubeExtractor.VideoInfo.VideoExtension":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeExtractor.VideoInfo");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "VideoExtension", "String");
-                xamlMember.Getter = get_13_VideoInfo_VideoExtension;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "YoutubeExtractor.VideoInfo.VideoType":
-                userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeExtractor.VideoInfo");
-                xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "VideoType", "YoutubeExtractor.VideoType");
-                xamlMember.Getter = get_14_VideoInfo_VideoType;
-                xamlMember.SetIsReadOnly();
-                break;
             case "YoutubeDownloader.MainPage.ViewModel":
                 userType = (global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlUserType)GetXamlTypeByName("YoutubeDownloader.MainPage");
                 xamlMember = new global::YoutubeDownloader.YoutubeDownloader_XamlTypeInfo.XamlMember(this, "ViewModel", "YoutubeDownloader.ViewModels.MainPageViewModel");
-                xamlMember.Getter = get_15_MainPage_ViewModel;
-                xamlMember.Setter = set_15_MainPage_ViewModel;
+                xamlMember.Getter = get_0_MainPage_ViewModel;
+                xamlMember.Setter = set_0_MainPage_ViewModel;
                 break;
             }
             return xamlMember;
