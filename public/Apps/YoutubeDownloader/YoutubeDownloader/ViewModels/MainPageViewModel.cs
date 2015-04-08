@@ -14,10 +14,6 @@ namespace YoutubeDownloader.ViewModels
 {
     public class MainPageViewModel : PageModel<PageModelSettings.None>
     {
-        public MainPageViewModel()
-        {
-            ItemPickedCommand = new DelegateCommand<ItemsPickedEventArgs>(OnItemPicked);
-        }
 
         private ObservableCollection<VideoInfo> videoInfos;
 
@@ -34,22 +30,6 @@ namespace YoutubeDownloader.ViewModels
             get { return isVideoDownloadable; }
             set { this.SetProperty(ref isVideoDownloadable, value); }
         }
-
-        private DelegateCommand<ItemsPickedEventArgs> itemPickedCommand;
-
-        public DelegateCommand<ItemsPickedEventArgs> ItemPickedCommand
-        {
-            get
-            {
-                return itemPickedCommand;
-            }
-
-            set
-            {
-                this.SetProperty(ref itemPickedCommand, value);
-            }
-        }
-
 
         /// <summary>
         /// Fetch video format for the download url
@@ -89,7 +69,6 @@ namespace YoutubeDownloader.ViewModels
 
         public override void Initialize(PageModelSettings.None settings)
         {
-            //ItemPickedCommand = new DelegateCommand<ItemsPickedEventArgs>(OnItemPicked);
             //throw new NotImplementedException();
         }
 
