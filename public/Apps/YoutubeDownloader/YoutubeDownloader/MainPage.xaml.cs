@@ -117,5 +117,10 @@ namespace YoutubeDownloader {
         {
             // todo: download video and store it in library
         }
+
+        private void ListPickerFlyout_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
+        {
+            this.viewModel.OnItemPicked(args);
+        }
     }
 }

@@ -7,11 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using YoutubeDownloader.Common;
 using YoutubeExtractor;
+using Windows.UI.Xaml.Controls;
+using System.IO;
 
 namespace YoutubeDownloader.ViewModels
 {
     public class MainPageViewModel : PageModel<PageModelSettings.None>
     {
+        public MainPageViewModel()
+        {
+            ItemPickedCommand = new DelegateCommand<ItemsPickedEventArgs>(OnItemPicked);
+        }
 
         private ObservableCollection<VideoInfo> videoInfos;
 
@@ -28,6 +34,22 @@ namespace YoutubeDownloader.ViewModels
             get { return isVideoDownloadable; }
             set { this.SetProperty(ref isVideoDownloadable, value); }
         }
+
+        private DelegateCommand<ItemsPickedEventArgs> itemPickedCommand;
+
+        public DelegateCommand<ItemsPickedEventArgs> ItemPickedCommand
+        {
+            get
+            {
+                return itemPickedCommand;
+            }
+
+            set
+            {
+                this.SetProperty(ref itemPickedCommand, value);
+            }
+        }
+
 
         /// <summary>
         /// Fetch video format for the download url
@@ -67,6 +89,7 @@ namespace YoutubeDownloader.ViewModels
 
         public override void Initialize(PageModelSettings.None settings)
         {
+            //ItemPickedCommand = new DelegateCommand<ItemsPickedEventArgs>(OnItemPicked);
             //throw new NotImplementedException();
         }
 
@@ -82,13 +105,13 @@ namespace YoutubeDownloader.ViewModels
             var resolutionToVideoDict = new Dictionary<int, VideoInfo>();
             foreach (var video in currentVideos)
             {
-                if(!resolutionToVideoDict.ContainsKey(video.Resolution))
+                if (!resolutionToVideoDict.ContainsKey(video.Resolution))
                 {
                     resolutionToVideoDict.Add(video.Resolution, video);
                 }
                 else
                 {
-                    if(resolutionToVideoDict[video.Resolution].CompareTo(video) != 1)
+                    if (resolutionToVideoDict[video.Resolution].CompareTo(video) != 1)
                     {
                         resolutionToVideoDict[video.Resolution] = video;
                     }
@@ -96,12 +119,12 @@ namespace YoutubeDownloader.ViewModels
             }
 
             // adding each format in the required order
-            if(resolutionToVideoDict.ContainsKey(1080))
+            if (resolutionToVideoDict.ContainsKey(1080))
             {
                 filteredVideos.Add(resolutionToVideoDict[1080]);
             }
 
-            if(resolutionToVideoDict.ContainsKey(720))
+            if (resolutionToVideoDict.ContainsKey(720))
             {
                 filteredVideos.Add(resolutionToVideoDict[720]);
             }
@@ -122,6 +145,39 @@ namespace YoutubeDownloader.ViewModels
             }
 
             return filteredVideos;
+        }
+
+        public void OnItemPicked(ItemsPickedEventArgs args)
+        {
+            if (args.AddedItems != null && args.AddedItems.Count != 0)
+            {
+                var video = args.AddedItems[0] as VideoInfo;
+
+                /*
+             * If the video has a decrypted signature, decipher it
+             */
+                if (video.RequiresDecryption)
+                {
+                    DownloadUrlResolver.DecryptDownloadUrl(video);
+                }
+
+                /*
+             * Create the video downloader.
+             * The first argument is the video to download.
+             * The second argument is the path to save the video file.
+             */
+                var videoDownloader = new VideoDownloader(video, Path.Combine(video.Title + video.VideoExtension));
+
+                // TODO: anichopr
+                //// Register the ProgressChanged event and print the current progress
+                //videoDownloader.DownloadProgressChanged += (sender, args) => Console.WriteLine(args.ProgressPercentage);
+
+                /*
+                 * Execute the video downloader.
+                 * For GUI applications note, that this method runs synchronously.
+                 */
+                videoDownloader.Execute();
+            }
         }
     }
 }

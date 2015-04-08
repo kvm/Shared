@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:YoutubeDownloader.Converters" 
     mc:Ignorable="d"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     DataContext="{Binding ViewModel, RelativeSource={RelativeSource Mode=Self}}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -33,7 +35,13 @@
                     Label="forward"/>
                 <AppBarButton x:Name="VideoDownloadButton" Icon="Download" Visibility="{Binding IsVideoDownloadable, Converter={StaticResource boolToVisibility}}">
                     <AppBarButton.Flyout>
-                        <ListPickerFlyout ItemsSource="{Binding VideoInfos}">
+                        <ListPickerFlyout ItemsSource="{Binding VideoInfos}" ItemsPicked="ListPickerFlyout_ItemsPicked">
+                            <!--<i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="ItemClick">
+                                    <core:InvokeCommandAction Command="{Binding ItemPickedCommand}"></core:InvokeCommandAction>
+                                    <core:CallMethodAction MethodName="{Binding OnItemPicked}" TargetObject="{Binding Mode=OneWay}"></core:CallMethodAction>
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>-->
                             <ListPickerFlyout.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource VideoInfoToName}}"></TextBlock>
