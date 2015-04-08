@@ -198,6 +198,8 @@ namespace YoutubeExtractor
         /// </summary>
         public VideoType VideoType { get; private set; }
 
+        public double VideoSizeInMb { get; set; }
+
         /// <summary>
         /// We use this in the <see cref="DownloadUrlResolver.DecryptDownloadUrl" /> method to
         /// decrypt the signature

@@ -338,5 +338,21 @@ namespace YoutubeExtractor {
 
             public Uri Uri { get; set; }
         }
+
+        public static double GetVideoSizeInMb(string url)
+        {
+            WebResponse response = HttpHelper.GetHeadeResponse(url);
+            if(response != null && response.Headers.AllKeys.Contains("Content-Length"))
+            {
+                var content = response.Headers["Content-Length"];
+                int ContentLength = 0;
+                if(int.TryParse(content, out ContentLength))
+                {
+                    return ContentLength / 1000000.0;
+                }
+            }
+
+            return -1.0;
+        }
     }
 }

@@ -16,6 +16,12 @@ namespace YoutubeDownloader.Converters
 
             string title = string.Concat(videoInfo.Resolution, "p ", videoInfo.VideoType.ToString());
 
+            // adding file size in mb
+            if(videoInfo.VideoSizeInMb > 0)
+            {
+                title += string.Concat(",  ", videoInfo.VideoSizeInMb.ToString("N3"), "Mb");
+            }
+
             return title;
         }
 

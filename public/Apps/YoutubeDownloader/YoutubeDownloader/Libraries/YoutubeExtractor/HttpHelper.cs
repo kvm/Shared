@@ -115,5 +115,19 @@ namespace YoutubeExtractor
                 }
             }
         }
+
+        public static WebResponse GetHeadeResponse(string url)
+        {
+            var request = WebRequest.Create(url);
+            request.Method = "HEAD";
+            request.Headers["User-Agent"] = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36";
+
+            System.Threading.Tasks.Task<WebResponse> task = System.Threading.Tasks.Task.Factory.FromAsync(
+                request.BeginGetResponse,
+                asyncResult => request.EndGetResponse(asyncResult),
+                null);
+
+            return task.Result;
+        }
     }
 }

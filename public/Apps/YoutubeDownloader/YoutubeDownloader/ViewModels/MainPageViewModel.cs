@@ -42,7 +42,10 @@ namespace YoutubeDownloader.ViewModels
                 return;
             }
 
-            this.VideoInfos = new ObservableCollection<VideoInfo>(GetRidOfDuplicateVideoFormats(DownloadUrlResolver.GetDownloadUrls(link).ToList()));
+            var videoList = GetRidOfDuplicateVideoFormats(DownloadUrlResolver.GetDownloadUrls(link).ToList());
+            UpdateVideosWithSizeInfo(videoList);
+
+            this.VideoInfos = new ObservableCollection<VideoInfo>(videoList);
 
             if (this.VideoInfos.Count > 0)
             {
@@ -156,6 +159,14 @@ namespace YoutubeDownloader.ViewModels
                  * For GUI applications note, that this method runs synchronously.
                  */
                 videoDownloader.Execute();
+            }
+        }
+
+        private void UpdateVideosWithSizeInfo(List<VideoInfo> videoInfos)
+        {
+            foreach (var videoInfo in videoInfos)
+            {
+                videoInfo.VideoSizeInMb = DownloadUrlResolver.GetVideoSizeInMb(videoInfo.DownloadUrl);
             }
         }
     }
