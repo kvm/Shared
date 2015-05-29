@@ -39,6 +39,7 @@
                                                 MaxHeight="173"
                                                 Fill="#3D3D3D"/>
                                             <Image Name="CoverArtImage"
+                                               Source="http://images.idiva.com/media/content/2012/Mar/the_playlist_hindi_songs.png"
                                                MinWidth="173" 
                                                MaxWidth="173" 
                                                MinHeight="173" 
