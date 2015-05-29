@@ -56,6 +56,7 @@ namespace YoutubeDownloader.Libraries.YoutubeExtractor.MediaLibrary
 
         public static void OnMediaDownloadStarted(MediaTrack track)
         {
+            track.DownldStatus = DownloadStatus.Downloading;
             if (track.MediaType == MediaItemType.Video)
             {
                 m_downloadingVideoTracks.Insert(0, track);
