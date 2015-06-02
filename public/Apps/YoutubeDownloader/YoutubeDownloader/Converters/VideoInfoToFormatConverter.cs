@@ -8,7 +8,7 @@ using YoutubeExtractor;
 
 namespace YoutubeDownloader.Converters
 {
-    public class VideoInfoToNameConverter: IValueConverter
+    public class VideoInfoToFormatConverter: IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

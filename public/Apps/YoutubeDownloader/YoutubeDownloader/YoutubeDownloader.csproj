@@ -90,13 +90,19 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\BindableBase.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Converters\VideoInfoToNameConverter.cs" />
+    <Compile Include="Converters\TextTrimmerConverter.cs" />
+    <Compile Include="Converters\VideoInfoToFormatConverter.cs" />
     <Compile Include="Common\Command.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\ViewModel.cs" />
+    <Compile Include="DesignData\DownloadInfoPage.cs" />
     <Compile Include="DownloadHistoryPage.xaml.cs">
       <DependentUpon>DownloadHistoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DownloadInfoPage.xaml.cs">
+      <DependentUpon>DownloadInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Libraries\YoutubeExtractor\AacAudioExtractor.cs" />
     <Compile Include="Libraries\YoutubeExtractor\AdaptiveType.cs" />
@@ -124,6 +130,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DownloadInfoPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\AudioPivotItemViewModel.cs" />
     <Compile Include="ViewModels\DownloadHistoryPageModel.cs" />
@@ -139,6 +146,10 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Icons\music.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\video.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
@@ -154,6 +165,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="DownloadHistoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DownloadInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

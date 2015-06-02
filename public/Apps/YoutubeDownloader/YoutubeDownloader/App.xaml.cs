@@ -35,6 +35,7 @@ namespace YoutubeDownloader
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+            this.Resuming += this.OnResuming;
         }
 
         /// <summary>
@@ -122,6 +123,17 @@ namespace YoutubeDownloader
 
             // TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            base.OnActivated(args);
+        }
+
+        private void OnResuming(object sender, object e)
+        {
+            //throw new NotImplementedException();
+           
         }
     }
 }

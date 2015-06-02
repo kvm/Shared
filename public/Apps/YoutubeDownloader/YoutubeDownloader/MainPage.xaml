@@ -16,7 +16,7 @@
              NavigationCompleted="Browser_NavigationCompleted" FrameContentLoading="WebViewControl_FrameContentLoading" />
     
     <Page.Resources>
-        <converters:VideoInfoToNameConverter x:Key="VideoInfoToName"></converters:VideoInfoToNameConverter>
+        <converters:VideoInfoToFormatConverter x:Key="VideoInfoToName"></converters:VideoInfoToFormatConverter>
         <converters:BooleanToVisibilityConverter x:Key="boolToVisibility"></converters:BooleanToVisibilityConverter>
     </Page.Resources>
     
@@ -29,7 +29,7 @@
                     Click="ForwardAppBarButton_Click"
                     Icon="Forward"
                     Label="forward"/>
-                <AppBarButton x:Name="VideoDownloadButton" Icon="Download" Visibility="{Binding IsVideoDownloadable, Converter={StaticResource boolToVisibility}}">
+                <!--<AppBarButton x:Name="VideoDownloadButton" Icon="Download" Visibility="{Binding IsVideoDownloadable, Converter={StaticResource boolToVisibility}}">
                     <AppBarButton.Flyout>
                         <ListPickerFlyout ItemsSource="{Binding VideoInfos}" ItemsPicked="ListPickerFlyout_ItemsPicked">
                             <ListPickerFlyout.ItemTemplate>
@@ -40,6 +40,9 @@
                         </ListPickerFlyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
+                <AppBarButton x:Name="MusicDownloadButton" Icon="MusicInfo" Click="musicDownloadClickHandler">
+                    
+                </AppBarButton>-->
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton

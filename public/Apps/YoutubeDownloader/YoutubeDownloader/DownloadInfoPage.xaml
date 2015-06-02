@@ -1,0 +1,65 @@
+﻿<Page
+    x:Class="YoutubeDownloader.DownloadInfoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:YoutubeDownloader"
+    xmlns:localDesign="using:YoutubeDownloader.DesignData"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:YoutubeDownloader.Converters" 
+    mc:Ignorable="d"
+    d:DataContext="{Binding Source={d:DesignInstance Type=localDesign:DownloadInfoPage, IsDesignTimeCreatable=True}}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <converters:TextTrimmerConverter x:Key="TextTrimmerConverter"></converters:TextTrimmerConverter>
+        <converters:VideoInfoToFormatConverter x:Key="VideoInfoToFormatConverter"></converters:VideoInfoToFormatConverter>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="{Binding BackgroundImageUri}" Opacity="0.6"></ImageBrush>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        </Grid>
+                 
+        <TextBlock x:Name="VideoTitle" FontWeight="SemiBold" Text="{Binding VideoTitle, Converter={StaticResource TextTrimmerConverter}, ConverterParameter=40}" Grid.Row="0" FontSize="30" TextWrapping="Wrap" Foreground="White" FontStretch="Normal"></TextBlock>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <StackPanel>
+                <Image Stretch="Fill" Height="150" Width="150" Source="/Assets/Icons/music.gif" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>
+                <TextBlock Text="Mp3" HorizontalAlignment="Left" Margin="58, 15, 0, 0" FontSize="32"></TextBlock>
+                <!--<TextBlock Text="32.3 Mb" HorizontalAlignment="Left" Margin="60, 40, 0, 0" FontSize="32"></TextBlock>-->
+                <Button Content="Download" Background="LimeGreen" Margin="35, 22, 0, 0" HorizontalAlignment="Left" Width="120"></Button>
+            </StackPanel>                        
+        </Grid>
+        
+        <Grid Grid.Row="1" Grid.Column="1">
+            <StackPanel>
+                <Image Stretch="Fill" Height="155" Width="155" Source="/Assets/Icons/video.png" Margin="0,0,20,0" HorizontalAlignment="Right" VerticalAlignment="Top"></Image>
+                <!--<TextBlock Text="MP4" HorizontalAlignment="Right" Margin="0, 35, 60, 0" FontSize="32"></TextBlock>-->
+                <!--<TextBlock Text="100 Mb" HorizontalAlignment="Right" Margin="0, 35, 60, 0" FontSize="32"></TextBlock>-->
+                <ComboBox AllowDrop="True" ItemsSource="{Binding VideoInfos}" HorizontalAlignment="Right" Margin="0, 0, 20, 0" BorderThickness="0" Background="Transparent" Width="150" SelectedItem="{Binding SelectedVideoInfo}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource VideoInfoToFormatConverter}}" FontSize="30" Foreground="White"></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button Content="Download" Background="DarkMagenta" HorizontalAlignment="Right" Margin="0,7,40,0" Width="120"></Button>
+            </StackPanel>
+        </Grid>        
+        
+        <Line Stretch="Fill" StrokeThickness="2" Stroke="White" X1="0" Y1="0" X2="0" Y2="1" Margin="0,102,0,23" Grid.RowSpan="2"/>
+    </Grid>
+</Page>

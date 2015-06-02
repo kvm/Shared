@@ -128,10 +128,12 @@ namespace YoutubeDownloader {
         /// <summary>
         /// Navigates forward in the WebView's history.
         /// </summary>
-        private void ForwardAppBarButton_Click(object sender, RoutedEventArgs e) {
-            if (WebViewControl.CanGoForward) {
-                WebViewControl.GoForward();
-            }
+        private async void ForwardAppBarButton_Click(object sender, RoutedEventArgs e) {
+            //if (WebViewControl.CanGoForward) {
+            //    WebViewControl.GoForward();
+            //}
+            currentUri = await WebViewControl.InvokeScriptAsync("eval", new String[] { "document.location.href;" });
+            Frame.Navigate(typeof(DownloadInfoPage), currentUri);
         }
 
         /// <summary>
@@ -143,8 +145,8 @@ namespace YoutubeDownloader {
 
         private async void WebViewControl_FrameContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
         {
-            currentUri = await sender.InvokeScriptAsync("eval", new String[] { "document.location.href;" });
-            this.viewModel.FetchVideoFormatsForVideo(currentUri);
+            //currentUri = await sender.InvokeScriptAsync("eval", new String[] { "document.location.href;" });
+            //this.viewModel.FetchVideoFormatsForVideo(currentUri);
         }
 
         private void DownloadHistoryButton_Click(object sender, RoutedEventArgs e)
@@ -203,6 +205,12 @@ namespace YoutubeDownloader {
         private void ListPickerFlyout_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
         {
             this.viewModel.OnItemPicked(args);
+        }
+
+        private void musicDownloadClickHandler(object sender, RoutedEventArgs e)
+        {
+            // download music file
+            this.viewModel.OnMusicDownloadTapped();
         }
     }
 }

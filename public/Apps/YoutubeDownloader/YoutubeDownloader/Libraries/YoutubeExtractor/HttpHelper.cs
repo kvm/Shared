@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace YoutubeExtractor
 {
-    internal static class HttpHelper
+    public static class HttpHelper
     {
         static string str;
         static ManualResetEvent completedEvent;
