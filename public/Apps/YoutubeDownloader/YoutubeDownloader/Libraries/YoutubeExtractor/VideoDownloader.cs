@@ -37,7 +37,7 @@ namespace YoutubeExtractor {
         /// </summary>
         /// <exception cref="IOException">The video file could not be saved.</exception>
         /// <exception cref="WebException">An error occured while downloading the video.</exception>
-        public async Task ExecuteAsync() {
+        public async Task ExecuteAsync(bool isForAudio) {
             this.OnDownloadStarted(EventArgs.Empty);
             var request = (HttpWebRequest)WebRequest.Create(this.Video.DownloadUrl);
 
@@ -50,7 +50,7 @@ namespace YoutubeExtractor {
             var response = await request.GetResponseAsync();
 
             Stream source = response.GetResponseStream();
-            Stream target = await CreateFile(this.SavePath);
+            Stream target = await CreateFile(this.SavePath, isForAudio ? ApplicationData.Current.LocalFolder : KnownFolders.VideosLibrary);
 
             var buffer = new byte[10059776];
             bool cancel = false;
@@ -78,7 +78,7 @@ namespace YoutubeExtractor {
             WebRequest request = (WebRequest)callbackResult.AsyncState;
             WebResponse response = request.EndGetResponse(callbackResult);
             Stream source = response.GetResponseStream();
-            Stream target = await CreateFile(this.SavePath);
+            Stream target = await CreateFile(this.SavePath, KnownFolders.VideosLibrary);
 
             var buffer = new byte[10059776];
             bool cancel = false;
@@ -99,7 +99,7 @@ namespace YoutubeExtractor {
             this.OnDownloadFinished(EventArgs.Empty, cancel, copiedBytes);
         }
 
-        async Task<Stream> CreateFile(string filename) {
+        async Task<Stream> CreateFile(string filename, StorageFolder folder) {
             using (ManualResetEvent completedEvent = new ManualResetEvent(false)) {
                 Stream fileStream = null;
                 //IAsyncOperation<StorageFile> asyncOp = ApplicationData.Current.LocalFolder.CreateFileAsync(filename, CreationCollisionOption.GenerateUniqueName);
@@ -110,7 +110,7 @@ namespace YoutubeExtractor {
                 //        completedEvent.Set();
                 //    }
                 //});
-                StorageFile storageFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(filename, CreationCollisionOption.GenerateUniqueName);
+                StorageFile storageFile = await folder.CreateFileAsync(filename, CreationCollisionOption.GenerateUniqueName);
                 fileStream = await storageFile.OpenStreamForWriteAsync();
                 completedEvent.Set();
                 completedEvent.WaitOne();

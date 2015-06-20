@@ -86,5 +86,10 @@ namespace YoutubeDownloader
         {
             this.ViewModel.DownloadMp3();
         }
+
+        private void VideoDownload_Click(object sender, RoutedEventArgs e)
+        {
+            this.ViewModel.DownloadVideo();
+        }
     }
 }

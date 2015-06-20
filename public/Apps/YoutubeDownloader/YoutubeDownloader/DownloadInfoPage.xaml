@@ -60,7 +60,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Button Content="Download" Background="Gray" HorizontalAlignment="Right" Margin="0,7,40,0" Width="120"></Button>
+                <Button x:Name="VideoDownload" Content="Download" Background="Gray" HorizontalAlignment="Right" Margin="0,7,40,0" Width="120" Click="VideoDownload_Click"></Button>
             </StackPanel>
         </Grid>        
         

@@ -72,7 +72,7 @@ namespace YoutubeExtractor
                 }
             };
 
-            await videoDownloader.ExecuteAsync();
+            await videoDownloader.ExecuteAsync(true);
         }
 
         private void ExtractAudio(string path)
