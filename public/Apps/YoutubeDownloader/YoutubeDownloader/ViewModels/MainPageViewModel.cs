@@ -207,5 +207,17 @@ namespace YoutubeDownloader.ViewModels
                 videoInfo.VideoSizeInMb = DownloadUrlResolver.GetVideoSizeInMb(videoInfo.DownloadUrl);
             }
         }
+
+        public void CheckIfPageIsVideoPage(string pageUrl)
+        {
+            if (pageUrl.Contains("youtube.com/watch?v="))
+            {
+                this.IsVideoDownloadable = true;
+            }
+            else
+            {
+                this.IsVideoDownloadable = false;
+            }
+        }
     }
 }

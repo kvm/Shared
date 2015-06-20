@@ -28,7 +28,7 @@
                     x:Uid="ForwardAppBarButton"
                     Click="ForwardAppBarButton_Click"
                     Icon="Forward"
-                    Label="forward"/>
+                    Label="forward" Visibility="{Binding IsVideoDownloadable, Converter={StaticResource boolToVisibility}}"/>
                 <!--<AppBarButton x:Name="VideoDownloadButton" Icon="Download" Visibility="{Binding IsVideoDownloadable, Converter={StaticResource boolToVisibility}}">
                     <AppBarButton.Flyout>
                         <ListPickerFlyout ItemsSource="{Binding VideoInfos}" ItemsPicked="ListPickerFlyout_ItemsPicked">

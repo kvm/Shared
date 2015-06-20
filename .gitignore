@@ -41,3 +41,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Dll files and pdb files and debug dump
+#\public\Apps\YoutubeDownloader\YoutubeDownloader\bin\*
+#\public\Apps\YoutubeDownloader\YoutubeDownloader\obj\*

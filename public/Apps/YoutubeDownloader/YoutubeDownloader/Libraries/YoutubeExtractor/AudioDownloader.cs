@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace YoutubeExtractor
 {
@@ -19,7 +20,7 @@ namespace YoutubeExtractor
         /// <param name="savePath">The path to save the audio.</param>
         /// /// <param name="bytesToDownload">An optional value to limit the number of bytes to download.</param>
         /// <exception cref="ArgumentNullException"><paramref name="video"/> or <paramref name="savePath"/> is <c>null</c>.</exception>
-        public AudioDownloader(VideoInfo video, string savePath, int? bytesToDownload = null)
+        public AudioDownloader(VideoInfo video, string savePath, int? bytesToDownload = 1024)
             : base(video, savePath, bytesToDownload)
         { }
 
@@ -43,11 +44,11 @@ namespace YoutubeExtractor
         /// </exception>
         /// <exception cref="AudioExtractionException">An error occured during audio extraction.</exception>
         /// <exception cref="WebException">An error occured while downloading the video.</exception>
-        public override void Execute()
+        public async override void Execute()
         {
             string tempPath = Path.GetRandomFileName();
 
-            this.DownloadVideo(tempPath);
+            await this.DownloadVideo(tempPath);
 
             if (!this.isCanceled)
             {
@@ -57,7 +58,7 @@ namespace YoutubeExtractor
             this.OnDownloadFinished(EventArgs.Empty, this.isCanceled, this.BytesToDownload.Value);
         }
 
-        private void DownloadVideo(string path)
+        private async Task DownloadVideo(string path)
         {
             var videoDownloader = new VideoDownloader(this.Video, path, this.BytesToDownload);
 
@@ -71,7 +72,7 @@ namespace YoutubeExtractor
                 }
             };
 
-            videoDownloader.Execute();
+            await videoDownloader.ExecuteAsync();
         }
 
         private void ExtractAudio(string path)

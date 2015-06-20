@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Storage;
 
@@ -9,7 +10,7 @@ namespace YoutubeExtractor
 {
     internal class FlvFile : IDisposable
     {
-        private readonly long fileLength;
+        private long fileLength;
         private readonly string inputPath;
         private readonly string outputPath;
         private IAudioExtractor audioExtractor;
@@ -25,25 +26,26 @@ namespace YoutubeExtractor
         {
             this.inputPath = inputPath;
             this.outputPath = outputPath;
-            PerformSyncFileRead(this.inputPath);
-            this.fileOffset = 0;
-            this.fileLength = fileStream.Length;
         }
 
-        void PerformSyncFileRead(string filename)
+        async Task PerformSyncFileRead(string filename)
         {
             using (ManualResetEvent completedEvent = new ManualResetEvent(false))
             {
-                IAsyncOperation<StorageFile> asyncOp = KnownFolders.MusicLibrary.CreateFileAsync(filename, CreationCollisionOption.GenerateUniqueName);
-                asyncOp.Completed = new AsyncOperationCompletedHandler<StorageFile>(async (IAsyncOperation<StorageFile> operation, AsyncStatus status) =>
-                {
-                    if (asyncOp.Status == AsyncStatus.Completed)
-                    {
-                        StorageFile fileStorage = asyncOp.GetResults();
-                        fileStream = await fileStorage.OpenStreamForWriteAsync();
-                        completedEvent.Set();
-                    }
-                });
+                //IAsyncOperation<StorageFile> asyncOp = ApplicationData.Current.LocalFolder.GetFileAsync(filename);
+                //asyncOp.Completed = new AsyncOperationCompletedHandler<StorageFile>(async (IAsyncOperation<StorageFile> operation, AsyncStatus status) =>
+                //{
+                //    if (asyncOp.Status == AsyncStatus.Completed)
+                //    {
+                //        StorageFile fileStorage = asyncOp.GetResults();
+                //        fileStream = await fileStorage.OpenStreamForReadAsync();
+                //        completedEvent.Set();
+                //    }
+                //});
+
+                StorageFile fileStorage = await ApplicationData.Current.LocalFolder.GetFileAsync(filename);
+                fileStream = await fileStorage.OpenStreamForReadAsync();
+                completedEvent.Set();
                 completedEvent.WaitOne();
             }
         }
@@ -59,8 +61,12 @@ namespace YoutubeExtractor
         }
 
         /// <exception cref="AudioExtractionException">The input file is not an FLV file.</exception>
-        public void ExtractStreams()
+        public async void ExtractStreams()
         {
+            await PerformSyncFileRead(this.inputPath);
+            this.fileOffset = 0;
+            this.fileLength = fileStream.Length;
+
             this.Seek(0);
 
             if (this.ReadUInt32() != 0x464C5601)

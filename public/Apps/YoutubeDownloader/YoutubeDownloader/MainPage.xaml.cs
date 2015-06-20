@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using YoutubeExtractor;
 using YoutubeDownloader.Libraries.YoutubeExtractor.MediaLibrary;
+using YoutubeDownloader.ViewModels;
 
 // The WebView Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
 
@@ -51,6 +52,7 @@ namespace YoutubeDownloader {
             MediaLogger.OpenLogFileAndLoadTracks(true);
             MediaLogger.OpenLogFileAndLoadTracks(false);
 
+            WebViewControl.Navigate(HomeUri);
             WebViewControl.NavigationCompleted += webView_NavigationCompleted;
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
@@ -97,7 +99,7 @@ namespace YoutubeDownloader {
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e) {
-            WebViewControl.Navigate(HomeUri);
+            //WebViewControl.Navigate(HomeUri);
             HardwareButtons.BackPressed += this.MainPage_BackPressed;
         }
 
@@ -145,8 +147,10 @@ namespace YoutubeDownloader {
 
         private async void WebViewControl_FrameContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
         {
-            //currentUri = await sender.InvokeScriptAsync("eval", new String[] { "document.location.href;" });
+            currentUri = await sender.InvokeScriptAsync("eval", new String[] { "document.location.href;" });
             //this.viewModel.FetchVideoFormatsForVideo(currentUri);
+
+            this.viewModel.CheckIfPageIsVideoPage(currentUri);
         }
 
         private void DownloadHistoryButton_Click(object sender, RoutedEventArgs e)
